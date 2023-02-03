@@ -1,0 +1,33 @@
+set xlabel "Execution time (%)"
+set ylabel "Working set (% of peak)"
+set yrange [0:110]
+set xrange [0:100]
+
+set style data lp
+set grid
+#set key bottom width 1 height 1
+set key above width 1
+
+#8.99
+#6.78
+#5.02
+#3.83
+#16.52
+#14.29
+#5.52
+
+plot "use-keb-bwd2.dat" \
+    index 0 u (100*($11-866.88))/(940.88-866.88):(100*$9/8.99) lt 1 pi 5 t "BLAS",\
+    "" index 1 u (100*($11-101995.17))/(102054.17-101995.17):(100*$9/6.78) lt 2 pi 5 t "SuperLU",\
+    "" index 2 u (100*($11-69582.26))/(69600.26-69582.26):(100*$9/5.02) lt 3 pi 5 t "NPB-FT",\
+    "" index 3 u (100*($11-76012.38))/(76076.38-76012.38):(100*$9/3.83) lt 4 pi 5 t "BARNES",\
+    "" index 4 u (100*($12-1.0))/(22.93-1.0):(100*$10/16.52) lt 5 pi 5 t "Hypre",\
+    "" index 5 u (100*($12-1.0))/(78.01-1.0):(100*$10/14.29) lt 6 pi 5 t "OpenFOAM",\
+    "" index 7 u (100*($11-654561.28))/(654582.29-654561.28):(100*$9/5.52) lt 7 pi 5 t "XSBench",\
+
+
+# Example with memprof output:
+# plot "file.log" u ((100*($11-first_time))/(last_time-first_time)):(100*$3/max_rssKB) pi 5 t "Label"
+
+# Example with emu output:
+# plot "file.log" u ((100*($11-first_time))/(last_time-first_time)):(100*$9/max_totalGB) pi 5 t "Label"
